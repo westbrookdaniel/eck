@@ -390,6 +390,19 @@ test("Nested optional fields", () => {
   expect(result1).toEqual({
     error: { nested: { age: "MISSING", nested: { age: "MISSING" } } },
   });
+
+  const result2 = validate({ age: 10, nested: { nested: { age: 10 } } });
+  expect(result2).toEqual({
+    error: { nested: { age: "MISSING" } },
+  });
+
+  const result3 = validate({
+    age: 10,
+    nested: { age: 10, nested: { age: 10 } },
+  });
+  expect(result3).toEqual({
+    data: { age: 10, nested: { age: 10, nested: { age: 10 } } },
+  });
 });
 
 // TODO: Add tests for objects in arrays (object validation + optional part of tree)
