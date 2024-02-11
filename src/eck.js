@@ -13,7 +13,6 @@ export function schema(schema, errorSchema) {
 function validateSchemaPart(data, schemaPart) {
   const error = {};
 
-  // TODO: Surely I can refactor this part
   for (const key in schemaPart) {
     const s = schemaPart[key];
 
@@ -67,7 +66,7 @@ function missingForNestedSchema(schemaPart) {
     const s = schemaPart[key];
     if (typeof s === "object" && !Array.isArray(s)) {
       error[key] = missingForNestedSchema(s);
-    } else {
+    } else if (!(Array.isArray(s) && s.includes("optional"))) {
       error[key] = "MISSING";
     }
   }

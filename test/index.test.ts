@@ -388,7 +388,7 @@ test("Nested optional fields", () => {
 
   const result1 = validate({ age: 10 });
   expect(result1).toEqual({
-    error: { age: 10, nested: { age: "MISSING", nested: { age: "MISSING" } } },
+    error: { nested: { age: "MISSING", nested: { age: "MISSING" } } },
   });
 });
 
